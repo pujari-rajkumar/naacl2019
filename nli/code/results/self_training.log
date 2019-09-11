@@ -1,0 +1,131 @@
+embedding_size 300
+seq_attn ./saved_model/snli_epoch-225_dev-acc-0.827_seq-atten.pt
+gpu_id 1
+trained_attn ./saved_model/snli_epoch-225_dev-acc-0.827_inter-atten.pt
+log_fname self_training.log
+optimizer Adagrad
+weight_decay 1e-05
+train_file ../preprocess/decomp-attn/data/self_training-train.hdf5
+seq_atten_optimizer ./saved_model/snli_epoch-225_dev-acc-0.827_seq-atten-optimizer.pt
+para_init 0.01
+epoch 250
+max_length 9999
+lr 0.05
+log_dir ./results/
+hidden_size 300
+display_interval 1000
+test_mode False
+test_file ../preprocess/decomp-attn/data/self_training-test.hdf5
+resume True
+ignore_ques True
+max_grad_norm 5
+dev_file ../preprocess/decomp-attn/data/self_training-val.hdf5
+inter_atten_optimizer ./saved_model/snli_epoch-225_dev-acc-0.827_inter-atten-optimizer.pt
+dev_interval 1
+w2v_file ../preprocess/decomp-attn/data/glove.hdf5
+model_path ./trained_model/
+input_optimizer ./saved_model/snli_epoch-225_dev-acc-0.827_input-optimizer.pt
+Adagrad_init 0.0
+trained_encoder ./saved_model/snli_epoch-225_dev-acc-0.827_input-encoder.pt
+loading data...
+train size # sent 53233
+dev size # sent 2637
+test size # sent 47000
+loading input embeddings...
+embedding_size 300
+seq_attn ./saved_model/snli_epoch-225_dev-acc-0.827_seq-atten.pt
+gpu_id 1
+trained_attn ./saved_model/snli_epoch-225_dev-acc-0.827_inter-atten.pt
+log_fname self_training.log
+optimizer Adagrad
+weight_decay 1e-05
+train_file ../preprocess/decomp-attn/data/self_training-train.hdf5
+seq_atten_optimizer ./saved_model/snli_epoch-225_dev-acc-0.827_seq-atten-optimizer.pt
+para_init 0.01
+epoch 250
+max_length 9999
+lr 0.05
+log_dir ./results/
+hidden_size 300
+display_interval 1000
+test_mode False
+test_file ../preprocess/decomp-attn/data/self_training-test.hdf5
+resume True
+ignore_ques False
+max_grad_norm 5
+dev_file ../preprocess/decomp-attn/data/self_training-val.hdf5
+inter_atten_optimizer ./saved_model/snli_epoch-225_dev-acc-0.827_inter-atten-optimizer.pt
+dev_interval 1
+w2v_file ../preprocess/decomp-attn/data/glove.hdf5
+model_path ./trained_model/
+input_optimizer ./saved_model/snli_epoch-225_dev-acc-0.827_input-optimizer.pt
+Adagrad_init 0.0
+trained_encoder ./saved_model/snli_epoch-225_dev-acc-0.827_input-encoder.pt
+loading data...
+train size # sent 53233
+dev size # sent 2637
+test size # sent 47000
+loading input embeddings...
+loading trained model.
+test before training starts
+init-test-acc 0.391
+start to train...
+epoch 0, batches 1000|9106, train-acc 0.415, loss 1.766, para-norm 6586.253, grad-norm 207.879, time 18.55s, 
+epoch 0, batches 2000|9106, train-acc 0.424, loss 1.797, para-norm 6859.817, grad-norm 27252.477, time 18.67s, 
+epoch 0, batches 3000|9106, train-acc 0.453, loss 1.500, para-norm 6991.134, grad-norm 146.405, time 18.40s, 
+epoch 0, batches 4000|9106, train-acc 0.500, loss 1.465, para-norm 7043.748, grad-norm 3115.845, time 16.32s, 
+epoch 0, batches 5000|9106, train-acc 0.446, loss 2.932, para-norm 7040.155, grad-norm 3883.008, time 34.21s, 
+epoch 0, batches 6000|9106, train-acc 0.379, loss 4.405, para-norm 7030.364, grad-norm 694.817, time 33.60s, 
+epoch 0, batches 7000|9106, train-acc 0.394, loss 3.890, para-norm 7023.636, grad-norm 463.201, time 33.58s, 
+epoch 0, batches 8000|9106, train-acc 0.377, loss 4.032, para-norm 6999.734, grad-norm 7772.927, time 19.79s, 
+epoch 0, batches 9000|9106, train-acc 0.380, loss 4.666, para-norm 6977.171, grad-norm 0.000, time 18.69s, 
+epoch 0, batches 9106|9106, train-acc 0.402, loss 4.860, para-norm 6980.979, grad-norm 36511.709, time 1.96s, 
+dev-acc 0.359
+current best-dev:
+	0 0.359
+save model!
+epoch 1, batches 1000|9106, train-acc 0.374, loss 4.773, para-norm 6981.341, grad-norm 8686.648, time 18.60s, 
+epoch 1, batches 2000|9106, train-acc 0.375, loss 4.576, para-norm 6961.865, grad-norm 30.915, time 13.36s, 
+epoch 1, batches 3000|9106, train-acc 0.395, loss 4.209, para-norm 6961.474, grad-norm 618.998, time 34.01s, 
+epoch 1, batches 4000|9106, train-acc 0.381, loss 4.141, para-norm 6946.702, grad-norm 0.045, time 34.23s, 
+epoch 1, batches 5000|9106, train-acc 0.382, loss 4.022, para-norm 6934.618, grad-norm 10713.269, time 33.22s, 
+epoch 1, batches 6000|9106, train-acc 0.389, loss 4.245, para-norm 6924.918, grad-norm 394.221, time 22.54s, 
+epoch 1, batches 7000|9106, train-acc 0.395, loss 4.241, para-norm 6912.206, grad-norm 0.000, time 18.80s, 
+epoch 1, batches 8000|9106, train-acc 0.384, loss 4.075, para-norm 6900.865, grad-norm 78.648, time 18.65s, 
+epoch 1, batches 9000|9106, train-acc 0.388, loss 4.149, para-norm 6889.507, grad-norm 141701.283, time 17.91s, 
+epoch 1, batches 9106|9106, train-acc 0.400, loss 4.018, para-norm 6890.110, grad-norm 0.250, time 0.98s, 
+dev-acc 0.359
+epoch 2, batches 1000|9106, train-acc 0.396, loss 3.909, para-norm 6881.595, grad-norm 579.732, time 29.80s, 
+epoch 2, batches 2000|9106, train-acc 0.391, loss 3.869, para-norm 6874.844, grad-norm 0.139, time 34.27s, 
+epoch 2, batches 3000|9106, train-acc 0.371, loss 3.636, para-norm 6863.134, grad-norm 29020.955, time 33.36s, 
+epoch 2, batches 4000|9106, train-acc 0.378, loss 3.699, para-norm 6851.044, grad-norm 0.000, time 26.03s, 
+epoch 2, batches 5000|9106, train-acc 0.395, loss 3.479, para-norm 6845.808, grad-norm 0.000, time 18.69s, 
+epoch 2, batches 6000|9106, train-acc 0.377, loss 3.977, para-norm 6836.312, grad-norm 0.000, time 18.70s, 
+epoch 2, batches 7000|9106, train-acc 0.382, loss 3.895, para-norm 6827.986, grad-norm 189.869, time 18.70s, 
+epoch 2, batches 8000|9106, train-acc 0.391, loss 3.658, para-norm 6817.483, grad-norm 92.860, time 10.81s, 
+epoch 2, batches 9000|9106, train-acc 0.386, loss 3.687, para-norm 6811.128, grad-norm 0.000, time 24.89s, 
+epoch 2, batches 9106|9106, train-acc 0.368, loss 3.510, para-norm 6810.579, grad-norm 95.750, time 3.43s, 
+dev-acc 0.359
+epoch 3, batches 1000|9106, train-acc 0.375, loss 3.927, para-norm 6806.116, grad-norm 394.142, time 34.67s, 
+epoch 3, batches 2000|9106, train-acc 0.406, loss 3.632, para-norm 6804.658, grad-norm 0.000, time 33.76s, 
+epoch 3, batches 3000|9106, train-acc 0.412, loss 3.667, para-norm 6796.312, grad-norm 424.478, time 21.93s, 
+epoch 3, batches 4000|9106, train-acc 0.390, loss 3.910, para-norm 6786.559, grad-norm 1458.893, time 18.74s, 
+epoch 3, batches 5000|9106, train-acc 0.383, loss 4.004, para-norm 6780.764, grad-norm 116.114, time 18.78s, 
+epoch 3, batches 6000|9106, train-acc 0.361, loss 4.172, para-norm 6778.986, grad-norm 604.664, time 20.10s, 
+epoch 3, batches 7000|9106, train-acc 0.386, loss 3.890, para-norm 6773.349, grad-norm 206.826, time 33.65s, 
+epoch 3, batches 8000|9106, train-acc 0.381, loss 4.014, para-norm 6767.161, grad-norm 336.528, time 34.05s, 
+epoch 3, batches 9000|9106, train-acc 0.375, loss 3.807, para-norm 6759.078, grad-norm 0.001, time 34.22s, 
+epoch 3, batches 9106|9106, train-acc 0.378, loss 4.332, para-norm 6758.203, grad-norm 0.000, time 3.90s, 
+dev-acc 0.359
+epoch 4, batches 1000|9106, train-acc 0.378, loss 3.951, para-norm 6750.434, grad-norm 0.000, time 18.60s, 
+epoch 4, batches 2000|9106, train-acc 0.380, loss 3.667, para-norm 6747.709, grad-norm 0.001, time 19.17s, 
+epoch 4, batches 3000|9106, train-acc 0.391, loss 3.746, para-norm 6742.393, grad-norm 614.980, time 18.72s, 
+epoch 4, batches 4000|9106, train-acc 0.395, loss 3.731, para-norm 6736.509, grad-norm 273.000, time 28.45s, 
+epoch 4, batches 5000|9106, train-acc 0.373, loss 3.860, para-norm 6722.076, grad-norm 8658.204, time 33.61s, 
+epoch 4, batches 6000|9106, train-acc 0.377, loss 3.735, para-norm 6713.443, grad-norm 443.925, time 33.77s, 
+epoch 4, batches 7000|9106, train-acc 0.379, loss 3.825, para-norm 6706.131, grad-norm 485.571, time 29.37s, 
+epoch 4, batches 8000|9106, train-acc 0.392, loss 3.624, para-norm 6698.763, grad-norm 1653.010, time 18.36s, 
+epoch 4, batches 9000|9106, train-acc 0.398, loss 3.745, para-norm 6688.460, grad-norm 1655.098, time 18.68s, 
+epoch 4, batches 9106|9106, train-acc 0.406, loss 3.502, para-norm 6687.720, grad-norm 0.000, time 2.00s, 
+dev-acc 0.359
+epoch 5, batches 1000|9106, train-acc 0.380, loss 3.729, para-norm 6680.215, grad-norm 15967.121, time 20.25s, 

@@ -1,0 +1,57 @@
+entity: "Para",			arguments: ["pId"::ArgumentType.UniqueID];
+entity: "Question",		arguments: ["qId"::ArgumentType.UniqueID];
+entity: "Choice",		arguments: ["cId"::ArgumentType.UniqueID];
+entity: "ChoiceLabel",		arguments: ["cLabel"::ArgumentType.UniqueID];
+
+predicate: "Entail",		arguments: [Choice, Choice];
+predicate: "Contradict",	arguments: [Choice, Choice];
+predicate: "HasLabel",		arguments: [Choice, ChoiceLabel];
+predicate: "InQuestion",	arguments: [Question, Choice];
+predicate: "InPara",		arguments: [Para, Choice];
+predicate: "IsSame",		arguments: [Choice, Choice];
+
+label: "Label", classes: 2, type: LabelType.Multiclass;
+
+load: "Para",			file: "test_pids.txt";
+load: "Question",		file: "test_qids.txt";
+load: "Choice",			file: "test_cids.txt";
+load: "ChoiceLabel",		file: "labels.txt";
+load: "Entail",			file: "test_entail.txt";
+load: "Contradict",		file: "test_contradict.txt";
+load: "HasLabel",		file: "test_preds.txt";
+load: "InPara",			file: "test_in_para.txt";
+load: "InQuestion", 		file: "test_in_ques.txt";
+load: "Label",			file: "labels.txt";
+load: "IsSame",			file: "pairs.txt";
+
+femodule: "fe_extractor";
+feclass: "FeExtractor";
+
+scmodule: "reading_sc";
+
+ruleset {
+  rule: InPara(P, C) & InQuestion(Q, C) => HasLabel(C, L^Label?),
+  lambda: 2.0,
+  score: "class_prob",
+  fefunctions: [vector("get_cscore")],
+  target: C;
+
+  rule: InPara(P, A) & InPara(P, B) => Entail(A, B)^?,
+  lambda: 1.0,
+  score: "class_prob",
+  fefunctions: [vector("get_entailment_score")],
+  target: B;
+
+  rule: InPara(P, A) & InPara(P, B) => Contradict(A, B)^?,
+  lambda: 1.0,
+  score: "class_prob",
+  fefunctions: [vector("get_contradiction_score")],
+  target: B;
+
+  hardconstr: InPara(P, A) & InPara(P, B) & HasLabel(A, "1")^? & Entail(A, B)^? & ~IsSame(A, B) => HasLabel(B, "1")^?;
+  hardconstr: InPara(Q, A) & InPara(Q, B) & HasLabel(A, "1")^? & Contradict(A, B)^? & ~IsSame(A, B) => HasLabel(B, "0")^?;
+  hardconstr: InPara(Q, A) & InPara(Q, B) & Entail(A, B)^? & ~IsSame(A, B) => ~Contradict(A, B)^?;
+  hardconstr: InPara(Q, A) & InPara(Q, B) & Contradict(A, B)^? & ~IsSame(A, B) => ~Entail(A, B)^?;
+  hardconstr: InPara(Q, A) & InPara(Q, B) & Entail(A, B)^? & ~IsSame(A, B) => ~Contradict(B, A)^?;
+  hardconstr: InPara(Q, A) & InPara(Q, B) & Contradict(A, B)^? & ~IsSame(A, B) => ~Entail(B, A)^?;
+} groupby: InPara.1;

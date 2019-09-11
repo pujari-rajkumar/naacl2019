@@ -1,0 +1,2107 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    GEQ
+    SUMFORALL
+    HEAD
+    SCCLASS
+    EQ
+    ID
+    LEQ
+
+Grammar
+
+Rule 0     S' -> model
+Rule 1     model -> instructionlist
+Rule 2     instructionlist -> instructionlist instruction ;
+Rule 3     instructionlist -> instruction ;
+Rule 4     instruction -> ENTITY : VARSTRING , ARGUMENTS : [ argumentdeflist ]
+Rule 5     instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ]
+Rule 6     argumentdeflist -> argumentdeflist , argumentdef
+Rule 7     argumentdeflist -> argumentdef
+Rule 8     argumentdef -> VARSTRING : : type
+Rule 9     type -> ARGSTRING
+Rule 10    type -> ARGSTRINGID
+Rule 11    type -> ARGINT
+Rule 12    type -> ARGDOUBLE
+Rule 13    type -> ARGID
+Rule 14    instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype
+Rule 15    labeltype -> LBMULTILABEL
+Rule 16    labeltype -> LBMULTICLASS
+Rule 17    labeltype -> LBBINARY
+Rule 18    instruction -> LOAD : VARSTRING , FILE : VARSTRING
+Rule 19    instruction -> RULESET { rulelist } GROUPBY : GROUPARG
+Rule 20    instruction -> DBMODULE : VARSTRING
+Rule 21    instruction -> DBCLASS : VARSTRING
+Rule 22    instruction -> FEMODULE : VARSTRING
+Rule 23    instruction -> FECLASS : VARSTRING
+Rule 24    instruction -> SCMODULE : VARSTRING
+Rule 25    rulelist -> rulelist rule ;
+Rule 26    rulelist -> rule ;
+Rule 27    rule -> RULE : proposition filters lambda scoring featureconf dbconf splitconf target
+Rule 28    lambda -> LAMBDA : FLOAT ,
+Rule 29    lambda -> <empty>
+Rule 30    splitconf -> SPLITCLASSIF : VARINSTANCE : : labeltype ,
+Rule 31    splitconf -> <empty>
+Rule 32    target -> TARGET : VARINSTANCE
+Rule 33    filters -> CONDS : [ condlist ] ,
+Rule 34    filters -> <empty>
+Rule 35    condlist -> condlist , condition
+Rule 36    condlist -> condition
+Rule 37    condition -> VARINSTANCE . VARARG = VARSTRING
+Rule 38    condition -> VARINSTANCE . VARARG = NUMBER
+Rule 39    condition -> VARINSTANCE . VARARG = FLOAT
+Rule 40    featureconf -> FEFUNC : [ featurelist ] ,
+Rule 41    dbconf -> DBFUNC : VARSTRING ,
+Rule 42    dbconf -> DBFUNC : VARSTRING
+Rule 43    dbconf -> <empty>
+Rule 44    scoring -> NETWORK : VARSTRING ,
+Rule 45    scoring -> SCORE : RULESET . NUMBER ,
+Rule 46    scoring -> SCORE : VARSTRING ,
+Rule 47    featurelist -> featurelist , featurefunc
+Rule 48    featurelist -> featurefunc
+Rule 49    featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+Rule 50    featurefunc -> VECTOR ( VARSTRING )
+Rule 51    featurefunc -> INPUT ( VARSTRING )
+Rule 52    rule -> HARDCONSTRAINT : proposition filters dbconf
+Rule 53    proposition -> conjunction IMPL instance ,
+Rule 54    proposition -> conjunction IMPL instance
+Rule 55    conjunction -> conjunction & instance
+Rule 56    conjunction -> instance
+Rule 57    instance -> VARPRED ( argumentlist )
+Rule 58    instance -> ~ VARPRED ( argumentlist )
+Rule 59    instance -> VARPRED ( argumentlist ) ^ ?
+Rule 60    instance -> ~ VARPRED ( argumentlist ) ^ ?
+Rule 61    instance -> VARPRED ( argumentlist ) *
+Rule 62    instance -> ~ VARPRED ( argumentlist ) *
+Rule 63    instance -> VARPRED ( argumentlist ) ^ ? *
+Rule 64    instance -> ~ VARPRED ( argumentlist ) ^ ? *
+Rule 65    argumentlist -> argumentlist , argument
+Rule 66    argumentlist -> argument
+Rule 67    argument -> VARINSTANCE
+Rule 68    argument -> VARSTRING
+Rule 69    argument -> VARINSTANCE ^ VARPRED ?
+Rule 70    argument -> VARSTRING ^ VARPRED ?
+
+Terminals, with rules where they appear
+
+&                    : 55
+(                    : 49 50 51 57 58 59 60 61 62 63 64
+)                    : 49 50 51 57 58 59 60 61 62 63 64
+*                    : 61 62 63 64
+,                    : 4 5 5 6 14 14 18 28 30 33 35 40 41 44 45 46 47 49 49 49 49 53 65
+.                    : 37 38 39 45
+:                    : 4 4 5 5 8 8 14 14 14 18 18 19 20 21 22 23 24 27 28 30 30 30 32 33 40 41 42 44 45 46 52
+;                    : 2 3 25 26
+=                    : 37 38 39
+?                    : 59 60 63 64 69 70
+ARGDOUBLE            : 12
+ARGID                : 13
+ARGINT               : 11
+ARGSTRING            : 9
+ARGSTRINGID          : 10
+ARGUMENTS            : 4 5
+COMMENT              : 
+CONDS                : 33
+DBCLASS              : 21
+DBFUNC               : 41 42
+DBMODULE             : 20
+EMBEDDING            : 49
+ENTITY               : 4
+EQ                   : 
+FECLASS              : 23
+FEFUNC               : 40
+FEMODULE             : 22
+FILE                 : 18
+FLOAT                : 28 39
+GEQ                  : 
+GROUPARG             : 19
+GROUPBY              : 19
+HARDCONSTRAINT       : 52
+HEAD                 : 
+ID                   : 
+IMPL                 : 53 54
+INPUT                : 51
+LABEL                : 14
+LAMBDA               : 28
+LBBINARY             : 17
+LBCLASSES            : 14
+LBMULTICLASS         : 16
+LBMULTILABEL         : 15
+LBTYPE               : 14
+LEQ                  : 
+LOAD                 : 18
+NETWORK              : 44
+NUMBER               : 14 38 45
+PREDICATE            : 5
+RULE                 : 27
+RULESET              : 19 45
+SCCLASS              : 
+SCMODULE             : 24
+SCORE                : 45 46
+SPLITCLASSIF         : 30
+SUMFORALL            : 
+TARGET               : 32
+VARARG               : 37 38 39
+VARINSTANCE          : 30 32 37 38 39 67 69
+VARPRED              : 5 5 57 58 59 60 61 62 63 64 69 70
+VARSTRING            : 4 5 8 14 18 18 20 21 22 23 24 37 41 42 44 46 49 49 49 49 49 50 51 68 70
+VECTOR               : 50
+[                    : 4 5 33 40
+]                    : 4 5 33 40
+^                    : 59 60 63 64 69 70
+error                : 
+{                    : 19
+}                    : 19
+~                    : 58 60 62 64
+
+Nonterminals, with rules where they appear
+
+argument             : 65 66
+argumentdef          : 6 7
+argumentdeflist      : 4 6
+argumentlist         : 57 58 59 60 61 62 63 64 65
+condition            : 35 36
+condlist             : 33 35
+conjunction          : 53 54 55
+dbconf               : 27 52
+featureconf          : 27
+featurefunc          : 47 48
+featurelist          : 40 47
+filters              : 27 52
+instance             : 53 54 55 56
+instruction          : 2 3
+instructionlist      : 1 2
+labeltype            : 14 30
+lambda               : 27
+model                : 0
+proposition          : 27 52
+rule                 : 25 26
+rulelist             : 19 25
+scoring              : 27
+splitconf            : 27
+target               : 27
+type                 : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . model
+    (1) model -> . instructionlist
+    (2) instructionlist -> . instructionlist instruction ;
+    (3) instructionlist -> . instruction ;
+    (4) instruction -> . ENTITY : VARSTRING , ARGUMENTS : [ argumentdeflist ]
+    (5) instruction -> . PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ]
+    (14) instruction -> . LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype
+    (18) instruction -> . LOAD : VARSTRING , FILE : VARSTRING
+    (19) instruction -> . RULESET { rulelist } GROUPBY : GROUPARG
+    (20) instruction -> . DBMODULE : VARSTRING
+    (21) instruction -> . DBCLASS : VARSTRING
+    (22) instruction -> . FEMODULE : VARSTRING
+    (23) instruction -> . FECLASS : VARSTRING
+    (24) instruction -> . SCMODULE : VARSTRING
+
+    ENTITY          shift and go to state 8
+    PREDICATE       shift and go to state 9
+    LABEL           shift and go to state 1
+    LOAD            shift and go to state 5
+    RULESET         shift and go to state 7
+    DBMODULE        shift and go to state 10
+    DBCLASS         shift and go to state 4
+    FEMODULE        shift and go to state 3
+    FECLASS         shift and go to state 2
+    SCMODULE        shift and go to state 12
+
+    instructionlist                shift and go to state 6
+    instruction                    shift and go to state 11
+    model                          shift and go to state 13
+
+state 1
+
+    (14) instruction -> LABEL . : VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype
+
+    :               shift and go to state 14
+
+
+state 2
+
+    (23) instruction -> FECLASS . : VARSTRING
+
+    :               shift and go to state 15
+
+
+state 3
+
+    (22) instruction -> FEMODULE . : VARSTRING
+
+    :               shift and go to state 16
+
+
+state 4
+
+    (21) instruction -> DBCLASS . : VARSTRING
+
+    :               shift and go to state 17
+
+
+state 5
+
+    (18) instruction -> LOAD . : VARSTRING , FILE : VARSTRING
+
+    :               shift and go to state 18
+
+
+state 6
+
+    (1) model -> instructionlist .
+    (2) instructionlist -> instructionlist . instruction ;
+    (4) instruction -> . ENTITY : VARSTRING , ARGUMENTS : [ argumentdeflist ]
+    (5) instruction -> . PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ]
+    (14) instruction -> . LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype
+    (18) instruction -> . LOAD : VARSTRING , FILE : VARSTRING
+    (19) instruction -> . RULESET { rulelist } GROUPBY : GROUPARG
+    (20) instruction -> . DBMODULE : VARSTRING
+    (21) instruction -> . DBCLASS : VARSTRING
+    (22) instruction -> . FEMODULE : VARSTRING
+    (23) instruction -> . FECLASS : VARSTRING
+    (24) instruction -> . SCMODULE : VARSTRING
+
+    $end            reduce using rule 1 (model -> instructionlist .)
+    ENTITY          shift and go to state 8
+    PREDICATE       shift and go to state 9
+    LABEL           shift and go to state 1
+    LOAD            shift and go to state 5
+    RULESET         shift and go to state 7
+    DBMODULE        shift and go to state 10
+    DBCLASS         shift and go to state 4
+    FEMODULE        shift and go to state 3
+    FECLASS         shift and go to state 2
+    SCMODULE        shift and go to state 12
+
+    instruction                    shift and go to state 19
+
+state 7
+
+    (19) instruction -> RULESET . { rulelist } GROUPBY : GROUPARG
+
+    {               shift and go to state 20
+
+
+state 8
+
+    (4) instruction -> ENTITY . : VARSTRING , ARGUMENTS : [ argumentdeflist ]
+
+    :               shift and go to state 21
+
+
+state 9
+
+    (5) instruction -> PREDICATE . : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ]
+
+    :               shift and go to state 22
+
+
+state 10
+
+    (20) instruction -> DBMODULE . : VARSTRING
+
+    :               shift and go to state 23
+
+
+state 11
+
+    (3) instructionlist -> instruction . ;
+
+    ;               shift and go to state 24
+
+
+state 12
+
+    (24) instruction -> SCMODULE . : VARSTRING
+
+    :               shift and go to state 25
+
+
+state 13
+
+    (0) S' -> model .
+
+
+
+state 14
+
+    (14) instruction -> LABEL : . VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype
+
+    VARSTRING       shift and go to state 26
+
+
+state 15
+
+    (23) instruction -> FECLASS : . VARSTRING
+
+    VARSTRING       shift and go to state 27
+
+
+state 16
+
+    (22) instruction -> FEMODULE : . VARSTRING
+
+    VARSTRING       shift and go to state 28
+
+
+state 17
+
+    (21) instruction -> DBCLASS : . VARSTRING
+
+    VARSTRING       shift and go to state 29
+
+
+state 18
+
+    (18) instruction -> LOAD : . VARSTRING , FILE : VARSTRING
+
+    VARSTRING       shift and go to state 30
+
+
+state 19
+
+    (2) instructionlist -> instructionlist instruction . ;
+
+    ;               shift and go to state 31
+
+
+state 20
+
+    (19) instruction -> RULESET { . rulelist } GROUPBY : GROUPARG
+    (25) rulelist -> . rulelist rule ;
+    (26) rulelist -> . rule ;
+    (27) rule -> . RULE : proposition filters lambda scoring featureconf dbconf splitconf target
+    (52) rule -> . HARDCONSTRAINT : proposition filters dbconf
+
+    RULE            shift and go to state 32
+    HARDCONSTRAINT  shift and go to state 33
+
+    rulelist                       shift and go to state 35
+    rule                           shift and go to state 34
+
+state 21
+
+    (4) instruction -> ENTITY : . VARSTRING , ARGUMENTS : [ argumentdeflist ]
+
+    VARSTRING       shift and go to state 36
+
+
+state 22
+
+    (5) instruction -> PREDICATE : . VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ]
+
+    VARSTRING       shift and go to state 37
+
+
+state 23
+
+    (20) instruction -> DBMODULE : . VARSTRING
+
+    VARSTRING       shift and go to state 38
+
+
+state 24
+
+    (3) instructionlist -> instruction ; .
+
+    ENTITY          reduce using rule 3 (instructionlist -> instruction ; .)
+    PREDICATE       reduce using rule 3 (instructionlist -> instruction ; .)
+    LABEL           reduce using rule 3 (instructionlist -> instruction ; .)
+    LOAD            reduce using rule 3 (instructionlist -> instruction ; .)
+    RULESET         reduce using rule 3 (instructionlist -> instruction ; .)
+    DBMODULE        reduce using rule 3 (instructionlist -> instruction ; .)
+    DBCLASS         reduce using rule 3 (instructionlist -> instruction ; .)
+    FEMODULE        reduce using rule 3 (instructionlist -> instruction ; .)
+    FECLASS         reduce using rule 3 (instructionlist -> instruction ; .)
+    SCMODULE        reduce using rule 3 (instructionlist -> instruction ; .)
+    $end            reduce using rule 3 (instructionlist -> instruction ; .)
+
+
+state 25
+
+    (24) instruction -> SCMODULE : . VARSTRING
+
+    VARSTRING       shift and go to state 39
+
+
+state 26
+
+    (14) instruction -> LABEL : VARSTRING . , LBCLASSES : NUMBER , LBTYPE : labeltype
+
+    ,               shift and go to state 40
+
+
+state 27
+
+    (23) instruction -> FECLASS : VARSTRING .
+
+    ;               reduce using rule 23 (instruction -> FECLASS : VARSTRING .)
+
+
+state 28
+
+    (22) instruction -> FEMODULE : VARSTRING .
+
+    ;               reduce using rule 22 (instruction -> FEMODULE : VARSTRING .)
+
+
+state 29
+
+    (21) instruction -> DBCLASS : VARSTRING .
+
+    ;               reduce using rule 21 (instruction -> DBCLASS : VARSTRING .)
+
+
+state 30
+
+    (18) instruction -> LOAD : VARSTRING . , FILE : VARSTRING
+
+    ,               shift and go to state 41
+
+
+state 31
+
+    (2) instructionlist -> instructionlist instruction ; .
+
+    ENTITY          reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    PREDICATE       reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    LABEL           reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    LOAD            reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    RULESET         reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    DBMODULE        reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    DBCLASS         reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    FEMODULE        reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    FECLASS         reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    SCMODULE        reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+    $end            reduce using rule 2 (instructionlist -> instructionlist instruction ; .)
+
+
+state 32
+
+    (27) rule -> RULE . : proposition filters lambda scoring featureconf dbconf splitconf target
+
+    :               shift and go to state 42
+
+
+state 33
+
+    (52) rule -> HARDCONSTRAINT . : proposition filters dbconf
+
+    :               shift and go to state 43
+
+
+state 34
+
+    (26) rulelist -> rule . ;
+
+    ;               shift and go to state 44
+
+
+state 35
+
+    (19) instruction -> RULESET { rulelist . } GROUPBY : GROUPARG
+    (25) rulelist -> rulelist . rule ;
+    (27) rule -> . RULE : proposition filters lambda scoring featureconf dbconf splitconf target
+    (52) rule -> . HARDCONSTRAINT : proposition filters dbconf
+
+    }               shift and go to state 46
+    RULE            shift and go to state 32
+    HARDCONSTRAINT  shift and go to state 33
+
+    rule                           shift and go to state 45
+
+state 36
+
+    (4) instruction -> ENTITY : VARSTRING . , ARGUMENTS : [ argumentdeflist ]
+
+    ,               shift and go to state 47
+
+
+state 37
+
+    (5) instruction -> PREDICATE : VARSTRING . , ARGUMENTS : [ VARPRED , VARPRED ]
+
+    ,               shift and go to state 48
+
+
+state 38
+
+    (20) instruction -> DBMODULE : VARSTRING .
+
+    ;               reduce using rule 20 (instruction -> DBMODULE : VARSTRING .)
+
+
+state 39
+
+    (24) instruction -> SCMODULE : VARSTRING .
+
+    ;               reduce using rule 24 (instruction -> SCMODULE : VARSTRING .)
+
+
+state 40
+
+    (14) instruction -> LABEL : VARSTRING , . LBCLASSES : NUMBER , LBTYPE : labeltype
+
+    LBCLASSES       shift and go to state 49
+
+
+state 41
+
+    (18) instruction -> LOAD : VARSTRING , . FILE : VARSTRING
+
+    FILE            shift and go to state 50
+
+
+state 42
+
+    (27) rule -> RULE : . proposition filters lambda scoring featureconf dbconf splitconf target
+    (53) proposition -> . conjunction IMPL instance ,
+    (54) proposition -> . conjunction IMPL instance
+    (55) conjunction -> . conjunction & instance
+    (56) conjunction -> . instance
+    (57) instance -> . VARPRED ( argumentlist )
+    (58) instance -> . ~ VARPRED ( argumentlist )
+    (59) instance -> . VARPRED ( argumentlist ) ^ ?
+    (60) instance -> . ~ VARPRED ( argumentlist ) ^ ?
+    (61) instance -> . VARPRED ( argumentlist ) *
+    (62) instance -> . ~ VARPRED ( argumentlist ) *
+    (63) instance -> . VARPRED ( argumentlist ) ^ ? *
+    (64) instance -> . ~ VARPRED ( argumentlist ) ^ ? *
+
+    VARPRED         shift and go to state 54
+    ~               shift and go to state 55
+
+    conjunction                    shift and go to state 53
+    instance                       shift and go to state 52
+    proposition                    shift and go to state 51
+
+state 43
+
+    (52) rule -> HARDCONSTRAINT : . proposition filters dbconf
+    (53) proposition -> . conjunction IMPL instance ,
+    (54) proposition -> . conjunction IMPL instance
+    (55) conjunction -> . conjunction & instance
+    (56) conjunction -> . instance
+    (57) instance -> . VARPRED ( argumentlist )
+    (58) instance -> . ~ VARPRED ( argumentlist )
+    (59) instance -> . VARPRED ( argumentlist ) ^ ?
+    (60) instance -> . ~ VARPRED ( argumentlist ) ^ ?
+    (61) instance -> . VARPRED ( argumentlist ) *
+    (62) instance -> . ~ VARPRED ( argumentlist ) *
+    (63) instance -> . VARPRED ( argumentlist ) ^ ? *
+    (64) instance -> . ~ VARPRED ( argumentlist ) ^ ? *
+
+    VARPRED         shift and go to state 54
+    ~               shift and go to state 55
+
+    instance                       shift and go to state 52
+    proposition                    shift and go to state 56
+    conjunction                    shift and go to state 53
+
+state 44
+
+    (26) rulelist -> rule ; .
+
+    }               reduce using rule 26 (rulelist -> rule ; .)
+    RULE            reduce using rule 26 (rulelist -> rule ; .)
+    HARDCONSTRAINT  reduce using rule 26 (rulelist -> rule ; .)
+
+
+state 45
+
+    (25) rulelist -> rulelist rule . ;
+
+    ;               shift and go to state 57
+
+
+state 46
+
+    (19) instruction -> RULESET { rulelist } . GROUPBY : GROUPARG
+
+    GROUPBY         shift and go to state 58
+
+
+state 47
+
+    (4) instruction -> ENTITY : VARSTRING , . ARGUMENTS : [ argumentdeflist ]
+
+    ARGUMENTS       shift and go to state 59
+
+
+state 48
+
+    (5) instruction -> PREDICATE : VARSTRING , . ARGUMENTS : [ VARPRED , VARPRED ]
+
+    ARGUMENTS       shift and go to state 60
+
+
+state 49
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES . : NUMBER , LBTYPE : labeltype
+
+    :               shift and go to state 61
+
+
+state 50
+
+    (18) instruction -> LOAD : VARSTRING , FILE . : VARSTRING
+
+    :               shift and go to state 62
+
+
+state 51
+
+    (27) rule -> RULE : proposition . filters lambda scoring featureconf dbconf splitconf target
+    (33) filters -> . CONDS : [ condlist ] ,
+    (34) filters -> .
+
+    CONDS           shift and go to state 63
+    LAMBDA          reduce using rule 34 (filters -> .)
+    NETWORK         reduce using rule 34 (filters -> .)
+    SCORE           reduce using rule 34 (filters -> .)
+
+    filters                        shift and go to state 64
+
+state 52
+
+    (56) conjunction -> instance .
+
+    IMPL            reduce using rule 56 (conjunction -> instance .)
+    &               reduce using rule 56 (conjunction -> instance .)
+
+
+state 53
+
+    (53) proposition -> conjunction . IMPL instance ,
+    (54) proposition -> conjunction . IMPL instance
+    (55) conjunction -> conjunction . & instance
+
+    IMPL            shift and go to state 65
+    &               shift and go to state 66
+
+
+state 54
+
+    (57) instance -> VARPRED . ( argumentlist )
+    (59) instance -> VARPRED . ( argumentlist ) ^ ?
+    (61) instance -> VARPRED . ( argumentlist ) *
+    (63) instance -> VARPRED . ( argumentlist ) ^ ? *
+
+    (               shift and go to state 67
+
+
+state 55
+
+    (58) instance -> ~ . VARPRED ( argumentlist )
+    (60) instance -> ~ . VARPRED ( argumentlist ) ^ ?
+    (62) instance -> ~ . VARPRED ( argumentlist ) *
+    (64) instance -> ~ . VARPRED ( argumentlist ) ^ ? *
+
+    VARPRED         shift and go to state 68
+
+
+state 56
+
+    (52) rule -> HARDCONSTRAINT : proposition . filters dbconf
+    (33) filters -> . CONDS : [ condlist ] ,
+    (34) filters -> .
+
+    CONDS           shift and go to state 63
+    DBFUNC          reduce using rule 34 (filters -> .)
+    ;               reduce using rule 34 (filters -> .)
+
+    filters                        shift and go to state 69
+
+state 57
+
+    (25) rulelist -> rulelist rule ; .
+
+    }               reduce using rule 25 (rulelist -> rulelist rule ; .)
+    RULE            reduce using rule 25 (rulelist -> rulelist rule ; .)
+    HARDCONSTRAINT  reduce using rule 25 (rulelist -> rulelist rule ; .)
+
+
+state 58
+
+    (19) instruction -> RULESET { rulelist } GROUPBY . : GROUPARG
+
+    :               shift and go to state 70
+
+
+state 59
+
+    (4) instruction -> ENTITY : VARSTRING , ARGUMENTS . : [ argumentdeflist ]
+
+    :               shift and go to state 71
+
+
+state 60
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS . : [ VARPRED , VARPRED ]
+
+    :               shift and go to state 72
+
+
+state 61
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES : . NUMBER , LBTYPE : labeltype
+
+    NUMBER          shift and go to state 73
+
+
+state 62
+
+    (18) instruction -> LOAD : VARSTRING , FILE : . VARSTRING
+
+    VARSTRING       shift and go to state 74
+
+
+state 63
+
+    (33) filters -> CONDS . : [ condlist ] ,
+
+    :               shift and go to state 75
+
+
+state 64
+
+    (27) rule -> RULE : proposition filters . lambda scoring featureconf dbconf splitconf target
+    (28) lambda -> . LAMBDA : FLOAT ,
+    (29) lambda -> .
+
+    LAMBDA          shift and go to state 76
+    NETWORK         reduce using rule 29 (lambda -> .)
+    SCORE           reduce using rule 29 (lambda -> .)
+
+    lambda                         shift and go to state 77
+
+state 65
+
+    (53) proposition -> conjunction IMPL . instance ,
+    (54) proposition -> conjunction IMPL . instance
+    (57) instance -> . VARPRED ( argumentlist )
+    (58) instance -> . ~ VARPRED ( argumentlist )
+    (59) instance -> . VARPRED ( argumentlist ) ^ ?
+    (60) instance -> . ~ VARPRED ( argumentlist ) ^ ?
+    (61) instance -> . VARPRED ( argumentlist ) *
+    (62) instance -> . ~ VARPRED ( argumentlist ) *
+    (63) instance -> . VARPRED ( argumentlist ) ^ ? *
+    (64) instance -> . ~ VARPRED ( argumentlist ) ^ ? *
+
+    VARPRED         shift and go to state 54
+    ~               shift and go to state 55
+
+    instance                       shift and go to state 78
+
+state 66
+
+    (55) conjunction -> conjunction & . instance
+    (57) instance -> . VARPRED ( argumentlist )
+    (58) instance -> . ~ VARPRED ( argumentlist )
+    (59) instance -> . VARPRED ( argumentlist ) ^ ?
+    (60) instance -> . ~ VARPRED ( argumentlist ) ^ ?
+    (61) instance -> . VARPRED ( argumentlist ) *
+    (62) instance -> . ~ VARPRED ( argumentlist ) *
+    (63) instance -> . VARPRED ( argumentlist ) ^ ? *
+    (64) instance -> . ~ VARPRED ( argumentlist ) ^ ? *
+
+    VARPRED         shift and go to state 54
+    ~               shift and go to state 55
+
+    instance                       shift and go to state 79
+
+state 67
+
+    (57) instance -> VARPRED ( . argumentlist )
+    (59) instance -> VARPRED ( . argumentlist ) ^ ?
+    (61) instance -> VARPRED ( . argumentlist ) *
+    (63) instance -> VARPRED ( . argumentlist ) ^ ? *
+    (65) argumentlist -> . argumentlist , argument
+    (66) argumentlist -> . argument
+    (67) argument -> . VARINSTANCE
+    (68) argument -> . VARSTRING
+    (69) argument -> . VARINSTANCE ^ VARPRED ?
+    (70) argument -> . VARSTRING ^ VARPRED ?
+
+    VARINSTANCE     shift and go to state 83
+    VARSTRING       shift and go to state 82
+
+    argumentlist                   shift and go to state 80
+    argument                       shift and go to state 81
+
+state 68
+
+    (58) instance -> ~ VARPRED . ( argumentlist )
+    (60) instance -> ~ VARPRED . ( argumentlist ) ^ ?
+    (62) instance -> ~ VARPRED . ( argumentlist ) *
+    (64) instance -> ~ VARPRED . ( argumentlist ) ^ ? *
+
+    (               shift and go to state 84
+
+
+state 69
+
+    (52) rule -> HARDCONSTRAINT : proposition filters . dbconf
+    (41) dbconf -> . DBFUNC : VARSTRING ,
+    (42) dbconf -> . DBFUNC : VARSTRING
+    (43) dbconf -> .
+
+    DBFUNC          shift and go to state 85
+    ;               reduce using rule 43 (dbconf -> .)
+
+    dbconf                         shift and go to state 86
+
+state 70
+
+    (19) instruction -> RULESET { rulelist } GROUPBY : . GROUPARG
+
+    GROUPARG        shift and go to state 87
+
+
+state 71
+
+    (4) instruction -> ENTITY : VARSTRING , ARGUMENTS : . [ argumentdeflist ]
+
+    [               shift and go to state 88
+
+
+state 72
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS : . [ VARPRED , VARPRED ]
+
+    [               shift and go to state 89
+
+
+state 73
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER . , LBTYPE : labeltype
+
+    ,               shift and go to state 90
+
+
+state 74
+
+    (18) instruction -> LOAD : VARSTRING , FILE : VARSTRING .
+
+    ;               reduce using rule 18 (instruction -> LOAD : VARSTRING , FILE : VARSTRING .)
+
+
+state 75
+
+    (33) filters -> CONDS : . [ condlist ] ,
+
+    [               shift and go to state 91
+
+
+state 76
+
+    (28) lambda -> LAMBDA . : FLOAT ,
+
+    :               shift and go to state 92
+
+
+state 77
+
+    (27) rule -> RULE : proposition filters lambda . scoring featureconf dbconf splitconf target
+    (44) scoring -> . NETWORK : VARSTRING ,
+    (45) scoring -> . SCORE : RULESET . NUMBER ,
+    (46) scoring -> . SCORE : VARSTRING ,
+
+    NETWORK         shift and go to state 94
+    SCORE           shift and go to state 95
+
+    scoring                        shift and go to state 93
+
+state 78
+
+    (53) proposition -> conjunction IMPL instance . ,
+    (54) proposition -> conjunction IMPL instance .
+
+    ,               shift and go to state 96
+    CONDS           reduce using rule 54 (proposition -> conjunction IMPL instance .)
+    DBFUNC          reduce using rule 54 (proposition -> conjunction IMPL instance .)
+    ;               reduce using rule 54 (proposition -> conjunction IMPL instance .)
+    LAMBDA          reduce using rule 54 (proposition -> conjunction IMPL instance .)
+    NETWORK         reduce using rule 54 (proposition -> conjunction IMPL instance .)
+    SCORE           reduce using rule 54 (proposition -> conjunction IMPL instance .)
+
+
+state 79
+
+    (55) conjunction -> conjunction & instance .
+
+    IMPL            reduce using rule 55 (conjunction -> conjunction & instance .)
+    &               reduce using rule 55 (conjunction -> conjunction & instance .)
+
+
+state 80
+
+    (57) instance -> VARPRED ( argumentlist . )
+    (59) instance -> VARPRED ( argumentlist . ) ^ ?
+    (61) instance -> VARPRED ( argumentlist . ) *
+    (63) instance -> VARPRED ( argumentlist . ) ^ ? *
+    (65) argumentlist -> argumentlist . , argument
+
+    )               shift and go to state 97
+    ,               shift and go to state 98
+
+
+state 81
+
+    (66) argumentlist -> argument .
+
+    )               reduce using rule 66 (argumentlist -> argument .)
+    ,               reduce using rule 66 (argumentlist -> argument .)
+
+
+state 82
+
+    (68) argument -> VARSTRING .
+    (70) argument -> VARSTRING . ^ VARPRED ?
+
+    )               reduce using rule 68 (argument -> VARSTRING .)
+    ,               reduce using rule 68 (argument -> VARSTRING .)
+    ^               shift and go to state 99
+
+
+state 83
+
+    (67) argument -> VARINSTANCE .
+    (69) argument -> VARINSTANCE . ^ VARPRED ?
+
+    )               reduce using rule 67 (argument -> VARINSTANCE .)
+    ,               reduce using rule 67 (argument -> VARINSTANCE .)
+    ^               shift and go to state 100
+
+
+state 84
+
+    (58) instance -> ~ VARPRED ( . argumentlist )
+    (60) instance -> ~ VARPRED ( . argumentlist ) ^ ?
+    (62) instance -> ~ VARPRED ( . argumentlist ) *
+    (64) instance -> ~ VARPRED ( . argumentlist ) ^ ? *
+    (65) argumentlist -> . argumentlist , argument
+    (66) argumentlist -> . argument
+    (67) argument -> . VARINSTANCE
+    (68) argument -> . VARSTRING
+    (69) argument -> . VARINSTANCE ^ VARPRED ?
+    (70) argument -> . VARSTRING ^ VARPRED ?
+
+    VARINSTANCE     shift and go to state 83
+    VARSTRING       shift and go to state 82
+
+    argumentlist                   shift and go to state 101
+    argument                       shift and go to state 81
+
+state 85
+
+    (41) dbconf -> DBFUNC . : VARSTRING ,
+    (42) dbconf -> DBFUNC . : VARSTRING
+
+    :               shift and go to state 102
+
+
+state 86
+
+    (52) rule -> HARDCONSTRAINT : proposition filters dbconf .
+
+    ;               reduce using rule 52 (rule -> HARDCONSTRAINT : proposition filters dbconf .)
+
+
+state 87
+
+    (19) instruction -> RULESET { rulelist } GROUPBY : GROUPARG .
+
+    ;               reduce using rule 19 (instruction -> RULESET { rulelist } GROUPBY : GROUPARG .)
+
+
+state 88
+
+    (4) instruction -> ENTITY : VARSTRING , ARGUMENTS : [ . argumentdeflist ]
+    (6) argumentdeflist -> . argumentdeflist , argumentdef
+    (7) argumentdeflist -> . argumentdef
+    (8) argumentdef -> . VARSTRING : : type
+
+    VARSTRING       shift and go to state 104
+
+    argumentdeflist                shift and go to state 105
+    argumentdef                    shift and go to state 103
+
+state 89
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ . VARPRED , VARPRED ]
+
+    VARPRED         shift and go to state 106
+
+
+state 90
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER , . LBTYPE : labeltype
+
+    LBTYPE          shift and go to state 107
+
+
+state 91
+
+    (33) filters -> CONDS : [ . condlist ] ,
+    (35) condlist -> . condlist , condition
+    (36) condlist -> . condition
+    (37) condition -> . VARINSTANCE . VARARG = VARSTRING
+    (38) condition -> . VARINSTANCE . VARARG = NUMBER
+    (39) condition -> . VARINSTANCE . VARARG = FLOAT
+
+    VARINSTANCE     shift and go to state 108
+
+    condlist                       shift and go to state 109
+    condition                      shift and go to state 110
+
+state 92
+
+    (28) lambda -> LAMBDA : . FLOAT ,
+
+    FLOAT           shift and go to state 111
+
+
+state 93
+
+    (27) rule -> RULE : proposition filters lambda scoring . featureconf dbconf splitconf target
+    (40) featureconf -> . FEFUNC : [ featurelist ] ,
+
+    FEFUNC          shift and go to state 112
+
+    featureconf                    shift and go to state 113
+
+state 94
+
+    (44) scoring -> NETWORK . : VARSTRING ,
+
+    :               shift and go to state 114
+
+
+state 95
+
+    (45) scoring -> SCORE . : RULESET . NUMBER ,
+    (46) scoring -> SCORE . : VARSTRING ,
+
+    :               shift and go to state 115
+
+
+state 96
+
+    (53) proposition -> conjunction IMPL instance , .
+
+    CONDS           reduce using rule 53 (proposition -> conjunction IMPL instance , .)
+    DBFUNC          reduce using rule 53 (proposition -> conjunction IMPL instance , .)
+    ;               reduce using rule 53 (proposition -> conjunction IMPL instance , .)
+    LAMBDA          reduce using rule 53 (proposition -> conjunction IMPL instance , .)
+    NETWORK         reduce using rule 53 (proposition -> conjunction IMPL instance , .)
+    SCORE           reduce using rule 53 (proposition -> conjunction IMPL instance , .)
+
+
+state 97
+
+    (57) instance -> VARPRED ( argumentlist ) .
+    (59) instance -> VARPRED ( argumentlist ) . ^ ?
+    (61) instance -> VARPRED ( argumentlist ) . *
+    (63) instance -> VARPRED ( argumentlist ) . ^ ? *
+
+    IMPL            reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    &               reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    ,               reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    CONDS           reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    LAMBDA          reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    NETWORK         reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    SCORE           reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    DBFUNC          reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    ;               reduce using rule 57 (instance -> VARPRED ( argumentlist ) .)
+    ^               shift and go to state 117
+    *               shift and go to state 116
+
+
+state 98
+
+    (65) argumentlist -> argumentlist , . argument
+    (67) argument -> . VARINSTANCE
+    (68) argument -> . VARSTRING
+    (69) argument -> . VARINSTANCE ^ VARPRED ?
+    (70) argument -> . VARSTRING ^ VARPRED ?
+
+    VARINSTANCE     shift and go to state 83
+    VARSTRING       shift and go to state 82
+
+    argument                       shift and go to state 118
+
+state 99
+
+    (70) argument -> VARSTRING ^ . VARPRED ?
+
+    VARPRED         shift and go to state 119
+
+
+state 100
+
+    (69) argument -> VARINSTANCE ^ . VARPRED ?
+
+    VARPRED         shift and go to state 120
+
+
+state 101
+
+    (58) instance -> ~ VARPRED ( argumentlist . )
+    (60) instance -> ~ VARPRED ( argumentlist . ) ^ ?
+    (62) instance -> ~ VARPRED ( argumentlist . ) *
+    (64) instance -> ~ VARPRED ( argumentlist . ) ^ ? *
+    (65) argumentlist -> argumentlist . , argument
+
+    )               shift and go to state 121
+    ,               shift and go to state 98
+
+
+state 102
+
+    (41) dbconf -> DBFUNC : . VARSTRING ,
+    (42) dbconf -> DBFUNC : . VARSTRING
+
+    VARSTRING       shift and go to state 122
+
+
+state 103
+
+    (7) argumentdeflist -> argumentdef .
+
+    ]               reduce using rule 7 (argumentdeflist -> argumentdef .)
+    ,               reduce using rule 7 (argumentdeflist -> argumentdef .)
+
+
+state 104
+
+    (8) argumentdef -> VARSTRING . : : type
+
+    :               shift and go to state 123
+
+
+state 105
+
+    (4) instruction -> ENTITY : VARSTRING , ARGUMENTS : [ argumentdeflist . ]
+    (6) argumentdeflist -> argumentdeflist . , argumentdef
+
+    ]               shift and go to state 125
+    ,               shift and go to state 124
+
+
+state 106
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED . , VARPRED ]
+
+    ,               shift and go to state 126
+
+
+state 107
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE . : labeltype
+
+    :               shift and go to state 127
+
+
+state 108
+
+    (37) condition -> VARINSTANCE . . VARARG = VARSTRING
+    (38) condition -> VARINSTANCE . . VARARG = NUMBER
+    (39) condition -> VARINSTANCE . . VARARG = FLOAT
+
+    .               shift and go to state 128
+
+
+state 109
+
+    (33) filters -> CONDS : [ condlist . ] ,
+    (35) condlist -> condlist . , condition
+
+    ]               shift and go to state 130
+    ,               shift and go to state 129
+
+
+state 110
+
+    (36) condlist -> condition .
+
+    ]               reduce using rule 36 (condlist -> condition .)
+    ,               reduce using rule 36 (condlist -> condition .)
+
+
+state 111
+
+    (28) lambda -> LAMBDA : FLOAT . ,
+
+    ,               shift and go to state 131
+
+
+state 112
+
+    (40) featureconf -> FEFUNC . : [ featurelist ] ,
+
+    :               shift and go to state 132
+
+
+state 113
+
+    (27) rule -> RULE : proposition filters lambda scoring featureconf . dbconf splitconf target
+    (41) dbconf -> . DBFUNC : VARSTRING ,
+    (42) dbconf -> . DBFUNC : VARSTRING
+    (43) dbconf -> .
+
+    DBFUNC          shift and go to state 85
+    SPLITCLASSIF    reduce using rule 43 (dbconf -> .)
+    TARGET          reduce using rule 43 (dbconf -> .)
+
+    dbconf                         shift and go to state 133
+
+state 114
+
+    (44) scoring -> NETWORK : . VARSTRING ,
+
+    VARSTRING       shift and go to state 134
+
+
+state 115
+
+    (45) scoring -> SCORE : . RULESET . NUMBER ,
+    (46) scoring -> SCORE : . VARSTRING ,
+
+    RULESET         shift and go to state 136
+    VARSTRING       shift and go to state 135
+
+
+state 116
+
+    (61) instance -> VARPRED ( argumentlist ) * .
+
+    IMPL            reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    &               reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    ,               reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    CONDS           reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    LAMBDA          reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    NETWORK         reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    SCORE           reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    DBFUNC          reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+    ;               reduce using rule 61 (instance -> VARPRED ( argumentlist ) * .)
+
+
+state 117
+
+    (59) instance -> VARPRED ( argumentlist ) ^ . ?
+    (63) instance -> VARPRED ( argumentlist ) ^ . ? *
+
+    ?               shift and go to state 137
+
+
+state 118
+
+    (65) argumentlist -> argumentlist , argument .
+
+    )               reduce using rule 65 (argumentlist -> argumentlist , argument .)
+    ,               reduce using rule 65 (argumentlist -> argumentlist , argument .)
+
+
+state 119
+
+    (70) argument -> VARSTRING ^ VARPRED . ?
+
+    ?               shift and go to state 138
+
+
+state 120
+
+    (69) argument -> VARINSTANCE ^ VARPRED . ?
+
+    ?               shift and go to state 139
+
+
+state 121
+
+    (58) instance -> ~ VARPRED ( argumentlist ) .
+    (60) instance -> ~ VARPRED ( argumentlist ) . ^ ?
+    (62) instance -> ~ VARPRED ( argumentlist ) . *
+    (64) instance -> ~ VARPRED ( argumentlist ) . ^ ? *
+
+    IMPL            reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    &               reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    ,               reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    CONDS           reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    LAMBDA          reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    NETWORK         reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    SCORE           reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    DBFUNC          reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    ;               reduce using rule 58 (instance -> ~ VARPRED ( argumentlist ) .)
+    ^               shift and go to state 141
+    *               shift and go to state 140
+
+
+state 122
+
+    (41) dbconf -> DBFUNC : VARSTRING . ,
+    (42) dbconf -> DBFUNC : VARSTRING .
+
+    ,               shift and go to state 142
+    SPLITCLASSIF    reduce using rule 42 (dbconf -> DBFUNC : VARSTRING .)
+    TARGET          reduce using rule 42 (dbconf -> DBFUNC : VARSTRING .)
+    ;               reduce using rule 42 (dbconf -> DBFUNC : VARSTRING .)
+
+
+state 123
+
+    (8) argumentdef -> VARSTRING : . : type
+
+    :               shift and go to state 143
+
+
+state 124
+
+    (6) argumentdeflist -> argumentdeflist , . argumentdef
+    (8) argumentdef -> . VARSTRING : : type
+
+    VARSTRING       shift and go to state 104
+
+    argumentdef                    shift and go to state 144
+
+state 125
+
+    (4) instruction -> ENTITY : VARSTRING , ARGUMENTS : [ argumentdeflist ] .
+
+    ;               reduce using rule 4 (instruction -> ENTITY : VARSTRING , ARGUMENTS : [ argumentdeflist ] .)
+
+
+state 126
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , . VARPRED ]
+
+    VARPRED         shift and go to state 145
+
+
+state 127
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE : . labeltype
+    (15) labeltype -> . LBMULTILABEL
+    (16) labeltype -> . LBMULTICLASS
+    (17) labeltype -> . LBBINARY
+
+    LBMULTILABEL    shift and go to state 148
+    LBMULTICLASS    shift and go to state 147
+    LBBINARY        shift and go to state 149
+
+    labeltype                      shift and go to state 146
+
+state 128
+
+    (37) condition -> VARINSTANCE . . VARARG = VARSTRING
+    (38) condition -> VARINSTANCE . . VARARG = NUMBER
+    (39) condition -> VARINSTANCE . . VARARG = FLOAT
+
+    VARARG          shift and go to state 150
+
+
+state 129
+
+    (35) condlist -> condlist , . condition
+    (37) condition -> . VARINSTANCE . VARARG = VARSTRING
+    (38) condition -> . VARINSTANCE . VARARG = NUMBER
+    (39) condition -> . VARINSTANCE . VARARG = FLOAT
+
+    VARINSTANCE     shift and go to state 108
+
+    condition                      shift and go to state 151
+
+state 130
+
+    (33) filters -> CONDS : [ condlist ] . ,
+
+    ,               shift and go to state 152
+
+
+state 131
+
+    (28) lambda -> LAMBDA : FLOAT , .
+
+    NETWORK         reduce using rule 28 (lambda -> LAMBDA : FLOAT , .)
+    SCORE           reduce using rule 28 (lambda -> LAMBDA : FLOAT , .)
+
+
+state 132
+
+    (40) featureconf -> FEFUNC : . [ featurelist ] ,
+
+    [               shift and go to state 153
+
+
+state 133
+
+    (27) rule -> RULE : proposition filters lambda scoring featureconf dbconf . splitconf target
+    (30) splitconf -> . SPLITCLASSIF : VARINSTANCE : : labeltype ,
+    (31) splitconf -> .
+
+    SPLITCLASSIF    shift and go to state 155
+    TARGET          reduce using rule 31 (splitconf -> .)
+
+    splitconf                      shift and go to state 154
+
+state 134
+
+    (44) scoring -> NETWORK : VARSTRING . ,
+
+    ,               shift and go to state 156
+
+
+state 135
+
+    (46) scoring -> SCORE : VARSTRING . ,
+
+    ,               shift and go to state 157
+
+
+state 136
+
+    (45) scoring -> SCORE : RULESET . . NUMBER ,
+
+    .               shift and go to state 158
+
+
+state 137
+
+    (59) instance -> VARPRED ( argumentlist ) ^ ? .
+    (63) instance -> VARPRED ( argumentlist ) ^ ? . *
+
+    IMPL            reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    &               reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    ,               reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    CONDS           reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    LAMBDA          reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    NETWORK         reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    SCORE           reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    DBFUNC          reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    ;               reduce using rule 59 (instance -> VARPRED ( argumentlist ) ^ ? .)
+    *               shift and go to state 159
+
+
+state 138
+
+    (70) argument -> VARSTRING ^ VARPRED ? .
+
+    )               reduce using rule 70 (argument -> VARSTRING ^ VARPRED ? .)
+    ,               reduce using rule 70 (argument -> VARSTRING ^ VARPRED ? .)
+
+
+state 139
+
+    (69) argument -> VARINSTANCE ^ VARPRED ? .
+
+    )               reduce using rule 69 (argument -> VARINSTANCE ^ VARPRED ? .)
+    ,               reduce using rule 69 (argument -> VARINSTANCE ^ VARPRED ? .)
+
+
+state 140
+
+    (62) instance -> ~ VARPRED ( argumentlist ) * .
+
+    IMPL            reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    &               reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    ,               reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    CONDS           reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    LAMBDA          reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    NETWORK         reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    SCORE           reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    DBFUNC          reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+    ;               reduce using rule 62 (instance -> ~ VARPRED ( argumentlist ) * .)
+
+
+state 141
+
+    (60) instance -> ~ VARPRED ( argumentlist ) ^ . ?
+    (64) instance -> ~ VARPRED ( argumentlist ) ^ . ? *
+
+    ?               shift and go to state 160
+
+
+state 142
+
+    (41) dbconf -> DBFUNC : VARSTRING , .
+
+    SPLITCLASSIF    reduce using rule 41 (dbconf -> DBFUNC : VARSTRING , .)
+    TARGET          reduce using rule 41 (dbconf -> DBFUNC : VARSTRING , .)
+    ;               reduce using rule 41 (dbconf -> DBFUNC : VARSTRING , .)
+
+
+state 143
+
+    (8) argumentdef -> VARSTRING : : . type
+    (9) type -> . ARGSTRING
+    (10) type -> . ARGSTRINGID
+    (11) type -> . ARGINT
+    (12) type -> . ARGDOUBLE
+    (13) type -> . ARGID
+
+    ARGSTRING       shift and go to state 164
+    ARGSTRINGID     shift and go to state 163
+    ARGINT          shift and go to state 161
+    ARGDOUBLE       shift and go to state 162
+    ARGID           shift and go to state 166
+
+    type                           shift and go to state 165
+
+state 144
+
+    (6) argumentdeflist -> argumentdeflist , argumentdef .
+
+    ]               reduce using rule 6 (argumentdeflist -> argumentdeflist , argumentdef .)
+    ,               reduce using rule 6 (argumentdeflist -> argumentdeflist , argumentdef .)
+
+
+state 145
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED . ]
+
+    ]               shift and go to state 167
+
+
+state 146
+
+    (14) instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype .
+
+    ;               reduce using rule 14 (instruction -> LABEL : VARSTRING , LBCLASSES : NUMBER , LBTYPE : labeltype .)
+
+
+state 147
+
+    (16) labeltype -> LBMULTICLASS .
+
+    ,               reduce using rule 16 (labeltype -> LBMULTICLASS .)
+    ;               reduce using rule 16 (labeltype -> LBMULTICLASS .)
+
+
+state 148
+
+    (15) labeltype -> LBMULTILABEL .
+
+    ,               reduce using rule 15 (labeltype -> LBMULTILABEL .)
+    ;               reduce using rule 15 (labeltype -> LBMULTILABEL .)
+
+
+state 149
+
+    (17) labeltype -> LBBINARY .
+
+    ,               reduce using rule 17 (labeltype -> LBBINARY .)
+    ;               reduce using rule 17 (labeltype -> LBBINARY .)
+
+
+state 150
+
+    (37) condition -> VARINSTANCE . VARARG . = VARSTRING
+    (38) condition -> VARINSTANCE . VARARG . = NUMBER
+    (39) condition -> VARINSTANCE . VARARG . = FLOAT
+
+    =               shift and go to state 168
+
+
+state 151
+
+    (35) condlist -> condlist , condition .
+
+    ]               reduce using rule 35 (condlist -> condlist , condition .)
+    ,               reduce using rule 35 (condlist -> condlist , condition .)
+
+
+state 152
+
+    (33) filters -> CONDS : [ condlist ] , .
+
+    LAMBDA          reduce using rule 33 (filters -> CONDS : [ condlist ] , .)
+    NETWORK         reduce using rule 33 (filters -> CONDS : [ condlist ] , .)
+    SCORE           reduce using rule 33 (filters -> CONDS : [ condlist ] , .)
+    DBFUNC          reduce using rule 33 (filters -> CONDS : [ condlist ] , .)
+    ;               reduce using rule 33 (filters -> CONDS : [ condlist ] , .)
+
+
+state 153
+
+    (40) featureconf -> FEFUNC : [ . featurelist ] ,
+    (47) featurelist -> . featurelist , featurefunc
+    (48) featurelist -> . featurefunc
+    (49) featurefunc -> . EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+    (50) featurefunc -> . VECTOR ( VARSTRING )
+    (51) featurefunc -> . INPUT ( VARSTRING )
+
+    EMBEDDING       shift and go to state 172
+    VECTOR          shift and go to state 170
+    INPUT           shift and go to state 173
+
+    featurefunc                    shift and go to state 169
+    featurelist                    shift and go to state 171
+
+state 154
+
+    (27) rule -> RULE : proposition filters lambda scoring featureconf dbconf splitconf . target
+    (32) target -> . TARGET : VARINSTANCE
+
+    TARGET          shift and go to state 174
+
+    target                         shift and go to state 175
+
+state 155
+
+    (30) splitconf -> SPLITCLASSIF . : VARINSTANCE : : labeltype ,
+
+    :               shift and go to state 176
+
+
+state 156
+
+    (44) scoring -> NETWORK : VARSTRING , .
+
+    FEFUNC          reduce using rule 44 (scoring -> NETWORK : VARSTRING , .)
+
+
+state 157
+
+    (46) scoring -> SCORE : VARSTRING , .
+
+    FEFUNC          reduce using rule 46 (scoring -> SCORE : VARSTRING , .)
+
+
+state 158
+
+    (45) scoring -> SCORE : RULESET . . NUMBER ,
+
+    NUMBER          shift and go to state 177
+
+
+state 159
+
+    (63) instance -> VARPRED ( argumentlist ) ^ ? * .
+
+    IMPL            reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    &               reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    ,               reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    CONDS           reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    LAMBDA          reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    NETWORK         reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    SCORE           reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    DBFUNC          reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+    ;               reduce using rule 63 (instance -> VARPRED ( argumentlist ) ^ ? * .)
+
+
+state 160
+
+    (60) instance -> ~ VARPRED ( argumentlist ) ^ ? .
+    (64) instance -> ~ VARPRED ( argumentlist ) ^ ? . *
+
+    IMPL            reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    &               reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    ,               reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    CONDS           reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    LAMBDA          reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    NETWORK         reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    SCORE           reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    DBFUNC          reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    ;               reduce using rule 60 (instance -> ~ VARPRED ( argumentlist ) ^ ? .)
+    *               shift and go to state 178
+
+
+state 161
+
+    (11) type -> ARGINT .
+
+    ]               reduce using rule 11 (type -> ARGINT .)
+    ,               reduce using rule 11 (type -> ARGINT .)
+
+
+state 162
+
+    (12) type -> ARGDOUBLE .
+
+    ]               reduce using rule 12 (type -> ARGDOUBLE .)
+    ,               reduce using rule 12 (type -> ARGDOUBLE .)
+
+
+state 163
+
+    (10) type -> ARGSTRINGID .
+
+    ]               reduce using rule 10 (type -> ARGSTRINGID .)
+    ,               reduce using rule 10 (type -> ARGSTRINGID .)
+
+
+state 164
+
+    (9) type -> ARGSTRING .
+
+    ]               reduce using rule 9 (type -> ARGSTRING .)
+    ,               reduce using rule 9 (type -> ARGSTRING .)
+
+
+state 165
+
+    (8) argumentdef -> VARSTRING : : type .
+
+    ]               reduce using rule 8 (argumentdef -> VARSTRING : : type .)
+    ,               reduce using rule 8 (argumentdef -> VARSTRING : : type .)
+
+
+state 166
+
+    (13) type -> ARGID .
+
+    ]               reduce using rule 13 (type -> ARGID .)
+    ,               reduce using rule 13 (type -> ARGID .)
+
+
+state 167
+
+    (5) instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ] .
+
+    ;               reduce using rule 5 (instruction -> PREDICATE : VARSTRING , ARGUMENTS : [ VARPRED , VARPRED ] .)
+
+
+state 168
+
+    (37) condition -> VARINSTANCE . VARARG = . VARSTRING
+    (38) condition -> VARINSTANCE . VARARG = . NUMBER
+    (39) condition -> VARINSTANCE . VARARG = . FLOAT
+
+    VARSTRING       shift and go to state 181
+    NUMBER          shift and go to state 180
+    FLOAT           shift and go to state 179
+
+
+state 169
+
+    (48) featurelist -> featurefunc .
+
+    ]               reduce using rule 48 (featurelist -> featurefunc .)
+    ,               reduce using rule 48 (featurelist -> featurefunc .)
+
+
+state 170
+
+    (50) featurefunc -> VECTOR . ( VARSTRING )
+
+    (               shift and go to state 182
+
+
+state 171
+
+    (40) featureconf -> FEFUNC : [ featurelist . ] ,
+    (47) featurelist -> featurelist . , featurefunc
+
+    ]               shift and go to state 184
+    ,               shift and go to state 183
+
+
+state 172
+
+    (49) featurefunc -> EMBEDDING . ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+
+    (               shift and go to state 185
+
+
+state 173
+
+    (51) featurefunc -> INPUT . ( VARSTRING )
+
+    (               shift and go to state 186
+
+
+state 174
+
+    (32) target -> TARGET . : VARINSTANCE
+
+    :               shift and go to state 187
+
+
+state 175
+
+    (27) rule -> RULE : proposition filters lambda scoring featureconf dbconf splitconf target .
+
+    ;               reduce using rule 27 (rule -> RULE : proposition filters lambda scoring featureconf dbconf splitconf target .)
+
+
+state 176
+
+    (30) splitconf -> SPLITCLASSIF : . VARINSTANCE : : labeltype ,
+
+    VARINSTANCE     shift and go to state 188
+
+
+state 177
+
+    (45) scoring -> SCORE : RULESET . NUMBER . ,
+
+    ,               shift and go to state 189
+
+
+state 178
+
+    (64) instance -> ~ VARPRED ( argumentlist ) ^ ? * .
+
+    IMPL            reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    &               reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    ,               reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    CONDS           reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    LAMBDA          reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    NETWORK         reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    SCORE           reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    DBFUNC          reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+    ;               reduce using rule 64 (instance -> ~ VARPRED ( argumentlist ) ^ ? * .)
+
+
+state 179
+
+    (39) condition -> VARINSTANCE . VARARG = FLOAT .
+
+    ]               reduce using rule 39 (condition -> VARINSTANCE . VARARG = FLOAT .)
+    ,               reduce using rule 39 (condition -> VARINSTANCE . VARARG = FLOAT .)
+
+
+state 180
+
+    (38) condition -> VARINSTANCE . VARARG = NUMBER .
+
+    ]               reduce using rule 38 (condition -> VARINSTANCE . VARARG = NUMBER .)
+    ,               reduce using rule 38 (condition -> VARINSTANCE . VARARG = NUMBER .)
+
+
+state 181
+
+    (37) condition -> VARINSTANCE . VARARG = VARSTRING .
+
+    ]               reduce using rule 37 (condition -> VARINSTANCE . VARARG = VARSTRING .)
+    ,               reduce using rule 37 (condition -> VARINSTANCE . VARARG = VARSTRING .)
+
+
+state 182
+
+    (50) featurefunc -> VECTOR ( . VARSTRING )
+
+    VARSTRING       shift and go to state 190
+
+
+state 183
+
+    (47) featurelist -> featurelist , . featurefunc
+    (49) featurefunc -> . EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+    (50) featurefunc -> . VECTOR ( VARSTRING )
+    (51) featurefunc -> . INPUT ( VARSTRING )
+
+    EMBEDDING       shift and go to state 172
+    VECTOR          shift and go to state 170
+    INPUT           shift and go to state 173
+
+    featurefunc                    shift and go to state 191
+
+state 184
+
+    (40) featureconf -> FEFUNC : [ featurelist ] . ,
+
+    ,               shift and go to state 192
+
+
+state 185
+
+    (49) featurefunc -> EMBEDDING ( . VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+
+    VARSTRING       shift and go to state 193
+
+
+state 186
+
+    (51) featurefunc -> INPUT ( . VARSTRING )
+
+    VARSTRING       shift and go to state 194
+
+
+state 187
+
+    (32) target -> TARGET : . VARINSTANCE
+
+    VARINSTANCE     shift and go to state 195
+
+
+state 188
+
+    (30) splitconf -> SPLITCLASSIF : VARINSTANCE . : : labeltype ,
+
+    :               shift and go to state 196
+
+
+state 189
+
+    (45) scoring -> SCORE : RULESET . NUMBER , .
+
+    FEFUNC          reduce using rule 45 (scoring -> SCORE : RULESET . NUMBER , .)
+
+
+state 190
+
+    (50) featurefunc -> VECTOR ( VARSTRING . )
+
+    )               shift and go to state 197
+
+
+state 191
+
+    (47) featurelist -> featurelist , featurefunc .
+
+    ]               reduce using rule 47 (featurelist -> featurelist , featurefunc .)
+    ,               reduce using rule 47 (featurelist -> featurelist , featurefunc .)
+
+
+state 192
+
+    (40) featureconf -> FEFUNC : [ featurelist ] , .
+
+    DBFUNC          reduce using rule 40 (featureconf -> FEFUNC : [ featurelist ] , .)
+    SPLITCLASSIF    reduce using rule 40 (featureconf -> FEFUNC : [ featurelist ] , .)
+    TARGET          reduce using rule 40 (featureconf -> FEFUNC : [ featurelist ] , .)
+
+
+state 193
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING . , VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+
+    ,               shift and go to state 198
+
+
+state 194
+
+    (51) featurefunc -> INPUT ( VARSTRING . )
+
+    )               shift and go to state 199
+
+
+state 195
+
+    (32) target -> TARGET : VARINSTANCE .
+
+    ;               reduce using rule 32 (target -> TARGET : VARINSTANCE .)
+
+
+state 196
+
+    (30) splitconf -> SPLITCLASSIF : VARINSTANCE : . : labeltype ,
+
+    :               shift and go to state 200
+
+
+state 197
+
+    (50) featurefunc -> VECTOR ( VARSTRING ) .
+
+    ]               reduce using rule 50 (featurefunc -> VECTOR ( VARSTRING ) .)
+    ,               reduce using rule 50 (featurefunc -> VECTOR ( VARSTRING ) .)
+
+
+state 198
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , . VARSTRING , VARSTRING , VARSTRING , VARSTRING )
+
+    VARSTRING       shift and go to state 201
+
+
+state 199
+
+    (51) featurefunc -> INPUT ( VARSTRING ) .
+
+    ]               reduce using rule 51 (featurefunc -> INPUT ( VARSTRING ) .)
+    ,               reduce using rule 51 (featurefunc -> INPUT ( VARSTRING ) .)
+
+
+state 200
+
+    (30) splitconf -> SPLITCLASSIF : VARINSTANCE : : . labeltype ,
+    (15) labeltype -> . LBMULTILABEL
+    (16) labeltype -> . LBMULTICLASS
+    (17) labeltype -> . LBBINARY
+
+    LBMULTILABEL    shift and go to state 148
+    LBMULTICLASS    shift and go to state 147
+    LBBINARY        shift and go to state 149
+
+    labeltype                      shift and go to state 202
+
+state 201
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING . , VARSTRING , VARSTRING , VARSTRING )
+
+    ,               shift and go to state 203
+
+
+state 202
+
+    (30) splitconf -> SPLITCLASSIF : VARINSTANCE : : labeltype . ,
+
+    ,               shift and go to state 204
+
+
+state 203
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , . VARSTRING , VARSTRING , VARSTRING )
+
+    VARSTRING       shift and go to state 205
+
+
+state 204
+
+    (30) splitconf -> SPLITCLASSIF : VARINSTANCE : : labeltype , .
+
+    TARGET          reduce using rule 30 (splitconf -> SPLITCLASSIF : VARINSTANCE : : labeltype , .)
+
+
+state 205
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING . , VARSTRING , VARSTRING )
+
+    ,               shift and go to state 206
+
+
+state 206
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , . VARSTRING , VARSTRING )
+
+    VARSTRING       shift and go to state 207
+
+
+state 207
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING . , VARSTRING )
+
+    ,               shift and go to state 208
+
+
+state 208
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , . VARSTRING )
+
+    VARSTRING       shift and go to state 209
+
+
+state 209
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING . )
+
+    )               shift and go to state 210
+
+
+state 210
+
+    (49) featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING ) .
+
+    ]               reduce using rule 49 (featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING ) .)
+    ,               reduce using rule 49 (featurefunc -> EMBEDDING ( VARSTRING , VARSTRING , VARSTRING , VARSTRING , VARSTRING ) .)
+
