@@ -1,6 +1,6 @@
 Metaphone==0.6
 numpy==1.14.2
-Pillow==5.1.0
+Pillow==6.2.0
 ply==3.11
 PyYAML==3.12
 scikit-learn==0.19.1
